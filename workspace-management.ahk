@@ -80,6 +80,7 @@ mapDesktopsFromRegistry()
 #x::switchDesktopByNumber(3)
 #c::switchDesktopByNumber(4)
 
+!Backspace::Send ^{Backspace}
 !+r::Send ^+r
 ![::Send ^[
 !]::Send ^]
