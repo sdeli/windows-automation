@@ -78,8 +78,12 @@ mapDesktopsFromRegistry()
 #\::switchDesktopByNumber(1)
 #z::switchDesktopByNumber(2)
 #x::switchDesktopByNumber(3)
-#c::switchDesktopByNumber(4)
+#a::switchDesktopByNumber(4)
+#s::switchDesktopByNumber(5)
+; #d::switchDesktopByNumber(6)
+#d::MsgBox sannya
 
+!,::Send |
 !Backspace::Send ^{Backspace}
 !+r::Send ^+r
 ![::Send ^[

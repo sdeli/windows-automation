@@ -9,6 +9,13 @@ chmod 774 /home/sandor/Projects /home/sandor/Documents /home/sandor/Downloads
 
 cd /home/sandor/
 
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install
+mv composer.phar /usr/local/bin/composer
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+command -v nvm
+
 sudo apt-get install zsh
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

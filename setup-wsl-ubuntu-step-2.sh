@@ -1,5 +1,6 @@
 # change default user => ubuntu1804 config --default-user sandor
 # cat /proc/version
+nvm install node
 cd /home/sandor/
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
