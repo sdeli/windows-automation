@@ -1,5 +1,5 @@
 # INSTALLING WSL
-# Before reinstalling backup .bashhistory/.bash_history, mysql full db, /var/www/html folder
+# Before reinstalling backup .zsh_history/.bash_history, mysql full db, /var/www/html folder
 mysqldump -u root -p --opt --all-databases > alldb.sql
 mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
 # get 'Ubuntu 18.04.5 LTS' from microsoft store
@@ -16,16 +16,17 @@ sudo add-apt-repository ppa:ondrej/php
 sudo apt install apache2 -y
 sudo service apache2 start
 sudo systemctl enable apache2.service
- 
-sudo chmod 777 /var/www/html
-sudo chown 777 [username]:[username] /var/www/html
+
+sudo chown [username]:[username] /var/www/html
 
 # INSTALL ZSH
-cd /var/www/html
 sudo apt-get install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # restart terminal
 
+cd /var/www/html
+git clone https://github.com/sdeli/windows-automation.git
+cd ./windows-automation
 ./configure-zshell.sh
 # restart terminal
 
@@ -73,7 +74,7 @@ sudo update-alternatives --config php
 sudo service apache2 restart
 
 # INSTALL PHPMYADMIN
-echo 'Include /etc/phpmyadmin/apache.conf' | sudo tee -a /etc/apache2/apache2.conf
+# download it (https://www.phpmyadmin.net/downloads/) then put it into /var/www/html
 
 # INSTALL NODE: https://github.com/nvm-sh/nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
@@ -96,6 +97,8 @@ php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a6110855
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 
+sudo mv composer.phar /usr/local/bin/composer
+
 # DOCKER
 # !Important: start up DOCKER DESKTOP app
 sudo apt-get install \
@@ -113,11 +116,19 @@ sudo add-apt-repository \
    stable"
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-sudo chmod 666 /var/run/docker.sock
-
-docker run hello-world
-sudo service docker start
 sudo usermod -aG docker ${USER}
+sudo service docker start
+sudo chmod 666 /var/run/docker.sock
+docker run hello-world
+
+# KUBERNETES: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+
 
 # REINSTALL ENV
 # To destroy the instance open cmd terminal:
