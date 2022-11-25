@@ -81,7 +81,6 @@ mapDesktopsFromRegistry()
 #a::switchDesktopByNumber(4)
 #s::switchDesktopByNumber(5)
 ; #d::switchDesktopByNumber(6)
-#d::MsgBox sannya
 
 !,::Send |
 !Backspace::Send ^{Backspace}

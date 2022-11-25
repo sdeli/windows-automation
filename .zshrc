@@ -4,16 +4,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 export ZSH="$HOME/.oh-my-zsh"
 FZF_BASE="/usr/local/opt/fzf"
 SAVEHIST=1000  # Save most-recent 1000 lines
-HISTFILE=~/.bash_history
 
 plugins=(
-    git
-    sudo
-    nvm
-    fzf
-    history
-    node
-    zsh-autosuggestions
+  git
+  sudo
+  nvm
+  npm
+  fzf
+  history
+  node
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
