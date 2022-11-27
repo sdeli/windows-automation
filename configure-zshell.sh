@@ -10,5 +10,5 @@ cd ~/.oh-my-zsh/custom/plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 cd ~/
 
-cat $(dirname $(realpath $0))/.zshrc > ~/.zshrc
+cat ./.zshrc > ~/.zshrc
 chmod 644 ~/.zshrc

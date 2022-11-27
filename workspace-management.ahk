@@ -1,17 +1,30 @@
 ; Globals
 DesktopCount = 2 ; Windows starts with 2 desktops at boot
 CurrentDesktop = 1 ; Desktop count is 1-indexed (Microsoft numbers them this way)
+currentAnimation = no animation
+CreateGUID()
+{
+    VarSetCapacity(pguid, 16, 0)
+    if !(DllCall("ole32.dll\CoCreateGuid", "ptr", &pguid)) {
+        size := VarSetCapacity(sguid, (38 << !!A_IsUnicode) + 1, 0)
+        if (DllCall("ole32.dll\StringFromGUID2", "ptr", &pguid, "ptr", &sguid, "int", size))
+            return StrGet(&sguid)
+    }
+    return ""
+}
 
 mapDesktopsFromRegistry() {
   global CurrentDesktop, DesktopCount, CurrentDesktopId
 
   IdLength := 32
   RegRead, CurrentDesktopId, HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, CurrentVirtualDesktop
+  FileAppend, CurrentDesktopId: %CurrentDesktopId% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
   if (CurrentDesktopId) {
     IdLength := StrLen(CurrentDesktopId)
   }
 
   RegRead, DesktopList, HKEY_CURRENT_USER, SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, VirtualDesktopIDs
+  FileAppend, DesktopList: %DesktopList% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
   if (DesktopList) {
     DesktopListLength := StrLen(DesktopList)
     DesktopCount := DesktopListLength / IdLength
@@ -24,9 +37,10 @@ mapDesktopsFromRegistry() {
     StartPos := (i * IdLength) + 1
     DesktopIter := SubStr(DesktopList, StartPos, IdLength)
     ; MsgBox "4 StartPos: " . %StartPos% . " " . "DesktopIter: " . %DesktopIter% . " " . "CurrentDesktopId: " . %CurrentDesktopId% . " "  . "DesktopCount: " . %DesktopCount% . " "
+    
     if (DesktopIter = CurrentDesktopId) {
       CurrentDesktop := i + 1
-      OutputDebug, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter%.
+      FileAppend, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
       break
     }
 
@@ -55,21 +69,50 @@ getSessionId()
 
 switchDesktopByNumber(targetDesktop)
 {
-  global CurrentDesktop, DesktopCount
+  global CurrentDesktop, DesktopCount, currentAnimation
+  prevDesktop := -1
+  GUID_1 := CreateGUID()
+  currentAnimation := GUID_1
+  FileAppend, ================= %GUID_1%`n, C:\Users\delis\Desktop\windows-automation\logs.txt
   mapDesktopsFromRegistry()
   if (targetDesktop > DesktopCount || targetDesktop < 1) {
     return
   }
   
   while(CurrentDesktop < targetDesktop) {
+    ; FileAppend, ================= `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    if (currentAnimation != GUID_1) {
+      return
+    }
+    if (prevDesktop === CurrentDesktop) {
+      Sleep 100
+      continue
+    }
+    prevDesktop := CurrentDesktop
+
+    ; FileAppend, target2: %targetDesktop% current: %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
     Send ^#{Right}
-    CurrentDesktop++
+    ; FileAppend, target2 finish: %targetDesktop% current: %CurrentDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    Sleep 50
+    mapDesktopsFromRegistry()
   }
 
   while(CurrentDesktop > targetDesktop) {
+    ; FileAppend, ================= `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    if (currentAnimation != GUID_1) {
+      return
+    }
+    if (prevDesktop === CurrentDesktop) {
+      Sleep 100
+      continue
+    }
+    prevDesktop := CurrentDesktop
+
+    ; FileAppend, target: %targetDesktop% current: %CurrentDesktop%  prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
     Send ^#{Left}
-    CurrentDesktop--
-    OutputDebug, [left] target: %targetDesktop% current: %CurrentDesktop%
+    ; FileAppend, target finish: %targetDesktop% current: %CurrentDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    Sleep 50
+    mapDesktopsFromRegistry()
   }
 }
 
