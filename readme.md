@@ -1,6 +1,6 @@
 # INSTALLING WSL
 
-__Before reinstalling backup .bashhistory/.bash_history, mysql full db, /var/www/html folder__
+__Before reinstalling backup .zsh_history/.bash_history, mysql full db, /var/www/html folder__
 
     mysqldump -u root -p --opt --all-databases > alldb.sql
     mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
@@ -48,7 +48,7 @@ __if the next command throws this error:__
 mkdir: cannot create directory ‘//.cache’: Permission denied
 -su: 19: /etc/profile.d/wsl-integration.sh: cannot create //.cache/wslu/integration: Directory nonexistent
 
-IN THAT CASE JUST RUN IT AGAIN AND IT WILL WORK
+__in that case just run it again and it will work__
 
     sudo service mysql start
  
@@ -91,8 +91,8 @@ __if above code doenst work:__
     sudo update-alternatives --set php /usr/bin/php7.4
     sudo service apache2 restart
 
-# INSTALL PHPMYADMIN
-echo 'Include /etc/phpmyadmin/apache.conf' | sudo tee -a /etc/apache2/apache2.conf
+## INSTALL PHPMYADMIN
+download it (https://www.phpmyadmin.net/downloads/) then put it into /var/www/html
 
 ## INSTALL NODE: https://github.com/nvm-sh/nvm
 
@@ -107,7 +107,7 @@ __or__
     nvm install v16.15.1
     nvm alias default v16.15.1
  
-## IMPOSTANT UTILITIES
+## IMPORTANT UTILITIES
     sudo apt-get install -y zip
     npm install -g typescript
  
@@ -118,7 +118,9 @@ __install composer: https://getcomposer.org/download/__
     php composer-setup.php
     php -r "unlink('composer-setup.php');"
 
-# DOCKER
+    sudo mv composer.phar /usr/local/bin/composer
+
+## DOCKER
 __!Important: start up DOCKER DESKTOP app__
 
     sudo apt-get install \
