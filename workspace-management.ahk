@@ -18,13 +18,13 @@ mapDesktopsFromRegistry() {
 
   IdLength := 32
   RegRead, CurrentDesktopId, HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, CurrentVirtualDesktop
-  FileAppend, CurrentDesktopId: %CurrentDesktopId% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+  ; FileAppend, CurrentDesktopId: %CurrentDesktopId% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
   if (CurrentDesktopId) {
     IdLength := StrLen(CurrentDesktopId)
   }
 
   RegRead, DesktopList, HKEY_CURRENT_USER, SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, VirtualDesktopIDs
-  FileAppend, DesktopList: %DesktopList% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+  ; FileAppend, DesktopList: %DesktopList% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
   if (DesktopList) {
     DesktopListLength := StrLen(DesktopList)
     DesktopCount := DesktopListLength / IdLength
@@ -40,7 +40,7 @@ mapDesktopsFromRegistry() {
     
     if (DesktopIter = CurrentDesktopId) {
       CurrentDesktop := i + 1
-      FileAppend, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+      ; FileAppend, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
       break
     }
 
@@ -73,45 +73,60 @@ switchDesktopByNumber(targetDesktop)
   prevDesktop := -1
   GUID_1 := CreateGUID()
   currentAnimation := GUID_1
-  FileAppend, ================= %GUID_1%`n, C:\Users\delis\Desktop\windows-automation\logs.txt
+  ; FileAppend, ================= AGAIN HIT %GUID_1%`n, C:\Users\delis\Desktop\windows-automation\logs.txt
   mapDesktopsFromRegistry()
   if (targetDesktop > DesktopCount || targetDesktop < 1) {
     return
   }
   
   while(CurrentDesktop < targetDesktop) {
-    ; FileAppend, ================= `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    ; FileAppend, %GUID_1% ================= `n, C:\Users\delis\Desktop\windows-automation\logs.txt
     if (currentAnimation != GUID_1) {
       return
     }
-    if (prevDesktop === CurrentDesktop) {
-      Sleep 100
+
+    mapDesktopsFromRegistry()
+    if (targetDesktop = CurrentDesktop) {
+      ; FileAppend, target: %GUID_1% sleeping %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+      return
+    }
+
+    if (prevDesktop = CurrentDesktop) {
+      ; FileAppend, target2: %GUID_1% sleeping %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+      Sleep 25
       continue
     }
     prevDesktop := CurrentDesktop
 
-    ; FileAppend, target2: %targetDesktop% current: %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    ; FileAppend, target2: %GUID_1% %targetDesktop% current: %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
     Send ^#{Right}
-    ; FileAppend, target2 finish: %targetDesktop% current: %CurrentDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
-    Sleep 50
+    ; FileAppend, target2 finish %GUID_1%: %targetDesktop% current: %CurrentDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    Sleep 25
     mapDesktopsFromRegistry()
   }
 
   while(CurrentDesktop > targetDesktop) {
-    ; FileAppend, ================= `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    ; FileAppend, %GUID_1% ================= `n, C:\Users\delis\Desktop\windows-automation\logs.txt
     if (currentAnimation != GUID_1) {
       return
     }
-    if (prevDesktop === CurrentDesktop) {
-      Sleep 100
+    mapDesktopsFromRegistry()
+    if (targetDesktop = CurrentDesktop) {
+      ; FileAppend, target: %GUID_1% sleeping %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+      return
+    }
+
+    if (prevDesktop = CurrentDesktop) {
+      ; FileAppend, target: %GUID_1% sleeping %CurrentDesktop% prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+      Sleep 25
       continue
     }
     prevDesktop := CurrentDesktop
 
-    ; FileAppend, target: %targetDesktop% current: %CurrentDesktop%  prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    ; FileAppend, target: %GUID_1% %targetDesktop% current: %CurrentDesktop%  prevDesktop: %prevDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
     Send ^#{Left}
-    ; FileAppend, target finish: %targetDesktop% current: %CurrentDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
-    Sleep 50
+    ; FileAppend, target finish %GUID_1%: %targetDesktop% current: %CurrentDesktop% `n, C:\Users\delis\Desktop\windows-automation\logs.txt
+    Sleep 25
     mapDesktopsFromRegistry()
   }
 }

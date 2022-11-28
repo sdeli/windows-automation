@@ -24,6 +24,16 @@ __open cmd and hit: ubuntu1804__
     
     sudo chown [username]:[username] /var/www/html
 
+__put code into the '<VirtualHost *:80>' tag in '/etc/apache2/sites-available/000-default.conf' :__ [https://needlify.com/post/install-and-configure-a-fully-functionnal-web-server-on-wsl-2-b1aa0954](https://needlify.com/post/install-and-configure-a-fully-functionnal-web-server-on-wsl-2-b1aa0954)
+```html
+<Directory /var/www/html>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+</Directory>
+```
+__then restart apache__
 ## INSTALL ZSH
     sudo apt-get install zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
