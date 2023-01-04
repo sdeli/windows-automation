@@ -10,5 +10,5 @@ cd ~/.oh-my-zsh/custom/plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 cd ~/
 
-cat ./.zshrc > ~/.zshrc
+sudo cp ./.zshrc ~/.zshrc
 chmod 644 ~/.zshrc
