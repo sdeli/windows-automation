@@ -70,7 +70,7 @@
 
     cd ~/
 
-# INSTALLING MYSQL
+## INSTALLING MYSQL
 
     sudo apt install software-properties-common
     sudo apt install mysql-server
@@ -167,9 +167,19 @@ sudo find /var/www/html -name "\*:Zone.Identifier" -type f -delete
 
     sudo mv composer.phar /usr/local/bin/composer
 
-**important commands here:**
+## Commands you will use for sure:
 
-wp search-replace 'http://localhost/test-wp/wp' 'http://test-wp.localhost'
+Search and replace url in wp database:
+
+    wp search-replace 'http://localhost/test-wp/wp' 'http://test-wp.localhost'
+
+Cache for 1 week (passwords for example):
+
+    git config --global credential.helper "cache --timeout=604800"
+
+Disable tracking file permissions in repos
+
+    git config core.fileMode false
 
 ## DOCKER
 
@@ -203,7 +213,7 @@ wp search-replace 'http://localhost/test-wp/wp' 'http://test-wp.localhost'
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
     kubectl version --client
 
-# REINSTALL ENV
+## REINSTALL ENV
 
 To destroy the instance open cmd terminal:
 
@@ -212,3 +222,5 @@ To destroy the instance open cmd terminal:
 To reinstall, put this into cmd
 
     ubuntu1804
+
+
