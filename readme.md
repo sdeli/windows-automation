@@ -4,6 +4,7 @@
 
 - .zsh_history/.bash_history
 - mysql full db
+- certs
 - /var/www/html folder
 - db:
 
