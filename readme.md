@@ -8,8 +8,8 @@
 - /var/www/html folder
 - db:
 
-  mysqldump -u root -p --opt --all-databases > alldb.sql
-  mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
+    mysqldump -u root -p --opt --all-databases > alldb.sql
+    mysqldump -u root -p --all-databases --skip-lock-tables > alldb.sql
 
 - backup: /etc/apache2/sites-available/000-default.conf
   **get 'Ubuntu 18.04.5 LTS' from microsoft store**
