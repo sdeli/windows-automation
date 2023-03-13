@@ -54,6 +54,8 @@
 </Directory>
 ```
 
+        sudo a2enmod rewrite
+
 **then restart apache**
 
 ## INSTALL ZSH
