@@ -185,6 +185,12 @@ Disable tracking file permissions in repos
 
     git config core.fileMode false
 
+Check what got inserted into the db after an action
+
+    mysqldump -p -usandor wordpress_test | sed 's$),($),\n($g' > db_before.sql
+    mysqldump -p -usandor wordpress_test | sed 's$),($),\n($g' > db_after.sql
+    sort db_before.sql db_before.sql db_after.sql | uniq -u > diff.csv
+
 ## DOCKER
 
 **!Important: start up DOCKER DESKTOP app**
