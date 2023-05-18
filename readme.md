@@ -161,7 +161,7 @@ sudo find /var/www/html -name "\*:Zone.Identifier" -type f -delete
 
     sudo apt-get install -y zip
     npm install -g typescript
-
+https://xdebug.org/wizard
 **install composer: https://getcomposer.org/download/**
 
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -170,6 +170,10 @@ sudo find /var/www/html -name "\*:Zone.Identifier" -type f -delete
     php -r "unlink('composer-setup.php');"
 
     sudo mv composer.phar /usr/local/bin/composer
+**XDEBUG**
+
+- install it by this url: https://xdebug.org/wizard
+- Dont forget to **restart apache** after having done commands  
 
 ## Commands you will use for sure:
 
