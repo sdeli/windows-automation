@@ -45,6 +45,7 @@
       DocumentRoot /Users/sdeli/Projects/test-wp/wp
     </VirtualHost>
 
+**You may need these line for mode_rewrite**
 ```html
 <Directory /var/www/html>
     Options Indexes FollowSymLinks MultiViews
@@ -54,7 +55,7 @@
 </Directory>
 ```
 
-        sudo a2enmod rewrite
+  sudo a2enmod rewrite
 
 **then restart apache**
 
