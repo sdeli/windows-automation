@@ -161,7 +161,7 @@ sudo find /var/www/html -name "\*:Zone.Identifier" -type f -delete
 
     sudo apt-get install -y zip
     npm install -g typescript
-https://xdebug.org/wizard
+
 **install composer: https://getcomposer.org/download/**
 
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
