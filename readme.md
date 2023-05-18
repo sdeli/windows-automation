@@ -3,7 +3,7 @@
 **Before reinstalling backup:**
 
 - .zsh_history/.bash_history
-- mysql full db
+- mysql full db\
 - certs
 - /var/www/html folder
 - db:
@@ -100,6 +100,25 @@
     GRANT ALL ON *.* TO 'sandor'@'localhost';
     FLUSH PRIVILEGES;
     exit
+**You may need these lines too, if it throws some auth error:**
+
+Put these lines at the end of the file /etc/mysql/my.cnf:
+
+    [mysqld]                                                                                                                
+    bind-address = 0.0.0.0                       
+    user=root          
+    pid-file     = /var/run/mysqld/mysqld.pid
+    socket       = /var/run/mysqld/mysqld.sock 
+    port         = 3306             
+
+    [client]                             
+    port         = 3306                             
+    socket       = /var/run/mysqld/mysqld.sock
+    Then put these commands on terminal (NOTE: if dir is not there then create one):
+
+    chmod 777 -R /var/run/mysqld
+    chmod 777 -R /var/lib/mysql
+    chmod 777 -R /var/log/mysql
 
 ## INSTALLING PHP 8.0
 
@@ -170,6 +189,7 @@ sudo find /var/www/html -name "\*:Zone.Identifier" -type f -delete
     php -r "unlink('composer-setup.php');"
 
     sudo mv composer.phar /usr/local/bin/composer
+
 **XDEBUG**
 
 - install it by this url: https://xdebug.org/wizard
@@ -236,5 +256,3 @@ To destroy the instance open cmd terminal:
 To reinstall, put this into cmd
 
     ubuntu1804
-
-
