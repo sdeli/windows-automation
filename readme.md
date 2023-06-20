@@ -15,7 +15,12 @@
 - backup: /etc/apache2/sites-available/000-default.conf
   **get 'Ubuntu 18.04.5 LTS' from microsoft store**
   **open cmd and hit: ubuntu1804**
-
+  
+## ADD CERTIFICATE TO CURL
+    
+    sudo cp /var/www/html/ZscalerRootCertificate-2048-SHA256.crt /usr/local/share/ca-certificates/
+    sudo update-ca-certificates
+    
 ## UPDATE DEPENDENCY MANAGERS
 
     sudo apt update && sudo apt upgrade
@@ -32,6 +37,8 @@
     sudo chown [username]:[username] /var/www/html
 
 **restore '/etc/apache2/sites-available/000-default.conf' file**
+
+    sudo cp /var/www/html/000-deault.conf /etc/apache2/sites-available/000-default.conf
 
 **or if you dont have it then put code into the '<VirtualHost \*:80>' tag in '/etc/apache2/sites-available/000-default.conf' :** [https://needlify.com/post/install-and-configure-a-fully-functionnal-web-server-on-wsl-2-b1aa0954](https://needlify.com/post/install-and-configure-a-fully-functionnal-web-server-on-wsl-2-b1aa0954)
 
