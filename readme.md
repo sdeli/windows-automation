@@ -109,7 +109,6 @@
     FLUSH PRIVILEGES;
     exit
 **You may need these lines too, if it throws some auth error:**
-
 Put these lines at the end of the file /etc/mysql/my.cnf:
 
     [mysqld]                                                                                                                
@@ -122,11 +121,12 @@ Put these lines at the end of the file /etc/mysql/my.cnf:
     [client]                             
     port         = 3306                             
     socket       = /var/run/mysqld/mysqld.sock
-    Then put these commands on terminal (NOTE: if dir is not there then create one):
+    
+**Then put these commands on terminal (NOTE: if dir is not there then create one):**
 
-    chmod 777 -R /var/run/mysqld
-    chmod 777 -R /var/lib/mysql
-    chmod 777 -R /var/log/mysql
+    sudo chmod 777 -R /var/run/mysqld
+    sudo chmod 777 -R /var/lib/mysql
+    sudo chmod 777 -R /var/log/mysql
 
 **If mysql wasn't working check out:** /var/log/mysql/error.log
 
