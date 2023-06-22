@@ -227,7 +227,7 @@ Check what got inserted into the db after an action
 
 ## DOCKER
 
-**!Important: start up DOCKER DESKTOP app**
+**!Important: start up DOCKER DESKTOP app ** and enable ubuntu under settings/Resources/Wsl Integration
 
     sudo apt-get install \
     apt-transport-https \
