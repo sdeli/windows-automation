@@ -8,7 +8,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 cd ~/.oh-my-zsh/custom/plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-cd ~/
+cd /var/www/html/windows-automation
 
 sudo cp ./.zshrc ~/.zshrc
 chmod 644 ~/.zshrc
