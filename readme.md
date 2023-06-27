@@ -204,7 +204,8 @@ php -r "unlink('composer-setup.php');"
 
 - install it by this url: https://xdebug.org/wizard
 - Dont forget to **restart apache** after having done commands
-- you may need these lines into /etc/php/8.0/apache2/conf.d/99-xdebug.ini
+
+you may need these lines into /etc/php/8.0/apache2/conf.d/99-xdebug.ini
 
     zend_extension=xdebug.so
     xdebug.mode = debug
