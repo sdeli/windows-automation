@@ -18,7 +18,7 @@
   
 ## ADD CERTIFICATE TO CURL
     
-    sudo cp /home/[username]/html/ZscalerRootCertificate-2048-SHA256.crt /usr/local/share/ca-certificates/
+    sudo cp /home/[username]/ZscalerRootCertificate-2048-SHA256.crt /usr/local/share/ca-certificates/
     sudo update-ca-certificates
     
 ## UPDATE DEPENDENCY MANAGERS
