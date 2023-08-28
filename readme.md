@@ -236,6 +236,9 @@ Check what got inserted into the db after an action
     mysqldump -p -usandor wordpress_test | sed 's$),($),\n($g' > db_after.sql
     sort db_before.sql db_before.sql db_after.sql | uniq -u > diff.csv
 
+Watch file changes in folder
+    watch --interval=1 'ls -ARrtd $(find /var/www/html/some-folder -type f) | echo $(find . -type f | wc -l) $(tail -n 1)'
+
 ## DOCKER
 
 **!Important: start up DOCKER DESKTOP app ** and enable ubuntu under settings/Resources/Wsl Integration
