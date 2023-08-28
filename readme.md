@@ -237,6 +237,7 @@ Check what got inserted into the db after an action
     sort db_before.sql db_before.sql db_after.sql | uniq -u > diff.csv
 
 Watch file changes in folder
+
     watch --interval=1 'ls -ARrtd $(find /var/www/html/some-folder -type f) | echo $(find . -type f | wc -l) $(tail -n 1)'
 
 ## DOCKER
