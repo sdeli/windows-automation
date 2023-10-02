@@ -239,6 +239,14 @@ Check what got inserted into the db after an action
 Watch file changes in folder
 
     watch --interval=1 'ls -ARrtd $(find /var/www/html/some-folder -type f) | echo $(find . -type f | wc -l) $(tail -n 1)'
+    
+Install things in pod
+
+    apt-get update && apt-get install -y git curl libmcrypt-dev default-mysql-client
+    apt install mariadb-client
+    curl -O -k https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    chmod +x wp-cli.phar
+    mv wp-cli.phar /usr/local/bin/wp
 
 ## DOCKER
 
