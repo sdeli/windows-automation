@@ -242,7 +242,8 @@ Watch file changes in folder
     
 Install things in pod
 
-    apt-get update && apt-get install -y git curl libmcrypt-dev default-mysql-client
+    apt-get update && apt install nano
+    apt-get install -y git curl libmcrypt-dev default-mysql-client
     apt install mariadb-client
     curl -O -k https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod +x wp-cli.phar
