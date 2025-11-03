@@ -78,6 +78,12 @@
     cd ./windows-automation
     ./configure-zshell.sh
 
+**you may want to adjust fzf search settings:**
+
+    `export FZF_CTRL_T_COMMAND='find /var/www/ /home /mnt/c/Projects/ /mnt/c/Users/delis/Downloads/ /mnt/c/Users/delis/Documents /mnt/c/Users/delis/Desktop'`
+
+    
+
 **restart terminal**
 
     cd ~/
@@ -291,3 +297,4 @@ To destroy the instance open cmd terminal:
 To reinstall, put this into cmd
 
     ubuntu1804
+
